@@ -2,9 +2,9 @@
 
 ## About
 This library contains the implementation of HTTP in C++ inspired by
-[NodeJS HTTP](nodejs.org/api/http.html) module. It is tempting bo be
+[NodeJS HTTP](https://nodejs.org/api/http.html) module. It is tempting bo be
 easy in use (like NodeJS one does) and extensible. The current roadmap
-only includes [expresscpp]() module implementation, which, as you
+only includes [expresscpp](https://github.com/arsdever/expresscpp) module implementation, which, as you
 might have guessed, will be based on [NodeJS Express](https://expressjs.com/)
 module
 
