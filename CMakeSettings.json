@@ -1,0 +1,16 @@
+﻿{
+  "configurations": [
+    {
+      "name": "debug_x64",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "inheritEnvironments": [ "msvc_x64" ],
+      "buildRoot": "${projectDir}\\out\\build\\${name}",
+      "installRoot": "${projectDir}\\out\\install\\${name}",
+      "cmakeCommandArgs": "-DCONAN_PROFILE=../profiles/win_x64_debug -DCONAN_REFERENCE=arsdever/stable",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "variables": []
+    }
+  ]
+}
