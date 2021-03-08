@@ -7,8 +7,8 @@ class HttpConanfile(ConanFile):
 	license = "MIT"
 	author = "Arsen Gharagyozyan (arsdever) [arsen.gharagyozyn.96@gmail.com]"
 	exports = "include/*.h"
-	requires = "sockpp/0.7"
-	
+	requires = "boost/1.75.0"
+
 	def package(self):
 		self.copy("*.h", "include/http", "include")
 
