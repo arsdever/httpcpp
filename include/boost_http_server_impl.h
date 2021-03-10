@@ -28,9 +28,6 @@ namespace httpcpp
 
         void listen(port_t port, host_t host, backlog_t backlog, callback_t callback = callback_t())
         {
-            // boost::asio::ip::tcp::resolver resolver(io_service_);
-            // boost::asio::ip::tcp::resolver::query query(address, port);
-            // boost::asio::ip::tcp::endpoint endpoint = *resolver.resolve(query);
             boost::system::error_code make_address_error_code;
             boost::asio::ip::address address = boost::asio::ip::make_address(host, make_address_error_code);
             if (make_address_error_code)
