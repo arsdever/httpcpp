@@ -11,18 +11,21 @@ add_executable (test_app "test_app.cpp")
 target_link_libraries(test_app
 PRIVATE
 	${CONAN_LIBS_BOOST}
+	${CONAN_LIBS_SPDLOG}
 	${CONAN_SYSTEM_LIBS_BOOST}
 )
 
 target_link_directories(test_app
 PRIVATE
 	${CONAN_LIB_DIRS_BOOST}
+	${CONAN_LIB_DIRS_SPDLOG}
 )
 
 target_include_directories(test_app
 	PUBLIC
 		${CMAKE_SOURCE_DIR}/include
 		${CONAN_INCLUDE_DIRS_BOOST}
+		${CONAN_INCLUDE_DIRS_SPDLOG}
 )
 
 target_precompile_headers(test_app
