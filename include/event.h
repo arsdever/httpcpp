@@ -1,8 +1,10 @@
 #pragma once
 
-#define EVENTS
+#include <initializer_list>
+#include <vector>
+#include <functional>
 
-namespace events
+namespace httpcpp
 {
 	template <typename ... A>
 	class event
@@ -12,23 +14,35 @@ namespace events
 
 		//event(std::string const& name);
 
-		event& operator +(event_handler h) { return operator += (h); }
-		event& operator +(std::initializer_list<event_handler> hlist) { return operator += (hlist); }
+		event& operator +(event_handler const& h) { return operator += (h); }
+		event& operator +(std::initializer_list<event_handler> const& hlist) { return operator += (hlist); }
 
-		event& operator +=(event_handler h)
+		event& operator +=(event_handler const& h)
 		{
 			m_handlers.push_back(h);
 			return *this;
 		}
 
-		event& operator +=(std::initializer_list<event_handler> hlist)
+		event& operator +=(std::initializer_list<event_handler> const& hlist)
 		{
 			m_handlers.insert(m_handlers.end(), hlist.begin(), hlist.end());
 			return *this;
 		}
 
-		event& operator = (event const&) = delete;
-		event& operator = (event&&) = delete;
+		event& operator =(event_handler const& h)
+		{
+			m_handlers.clear();
+			return operator +=(h);
+		}
+
+		event& operator =(std::initializer_list<event_handler> const& h)
+		{
+			m_handlers.clear();
+			return operator +=(h);
+		}
+
+		event& operator =(event const&) = delete;
+		event& operator =(event&&) = delete;
 
 		void operator()(A ... args)
 		{
