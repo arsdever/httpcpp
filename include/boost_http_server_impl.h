@@ -2,16 +2,19 @@
 
 #include <string>
 #include <functional>
+#include <iostream>
+#include <optional>
 
 #include <boost/asio.hpp>
-#include <iostream>
+
+#include <error.h>
 
 namespace httpcpp
 {
     class boost_http_server_impl
     {
     public:
-        using callback_t = std::function<void()>;
+        using callback_t = std::function<void(std::optional<error> const&)>;
         using port_t = unsigned short;
         using host_t = std::string;
         using backlog_t = int;
@@ -40,6 +43,18 @@ namespace httpcpp
             m_serverAcceptor.bind(ep);
             m_serverAcceptor.listen();
             start_accepting();
+        }
+
+        void close(callback_t callback = callback_t())
+        {
+            if (!m_serverAcceptor.is_open())
+            {
+                if (callback)
+                    callback(error());
+                return;
+            }
+
+            m_serverAcceptor.close();
         }
 
     private:

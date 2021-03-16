@@ -5,6 +5,7 @@ cmake_minimum_required (VERSION 3.8)
 
 # Add source to this project's executable.
 add_executable (test_app "test_app.cpp")
+set_property(TARGET test_app PROPERTY CXX_STANDARD 17)
 
 # TODO: Add tests and install targets if needed.
 
