@@ -8,6 +8,7 @@
 #include <boost/asio.hpp>
 
 #include <error.h>
+#include <event.h>
 
 namespace httpcpp
 {
@@ -82,6 +83,22 @@ namespace httpcpp
                 // Session was not established
             }
         }
+
+    public:
+        long headers_timeout = 60000;
+        bool listening = false;
+        long max_headers_count = 2000;
+        long request_timeout = 0;
+        long timeout = 0;
+        long keep_alive_timeout = 5000;
+
+        event<> evt_check_continue;
+        event<> evt_check_expectation;
+        event<> evt_client_error;
+        event<> evt_close;
+        event<> evt_connection;
+        event<> evt_request;
+        event<> evt_upgrade;
 
     private:
         boost::asio::ip::tcp::acceptor m_serverAcceptor;

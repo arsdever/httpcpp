@@ -1,5 +1,7 @@
 #pragma once
 
+#include <event.h>
+
 namespace httpcpp
 {
     template <typename impl>
@@ -15,6 +17,19 @@ namespace httpcpp
     public:
         basic_http_server(context_t& context)
             : m_impl(context)
+            , headers_timeout(m_impl.headers_timeout)
+            , listening(m_impl.listening)
+            , max_headers_count(m_impl.max_headers_count)
+            , request_timeout(m_impl.request_timeout)
+            , timeout(m_impl.timeout)
+            , keep_alive_timeout(m_impl.keep_alive_timeout)
+            , evt_check_continue(m_impl.evt_check_continue)
+            , evt_check_expectation(m_impl.evt_check_expectation)
+            , evt_client_error(m_impl.evt_client_error)
+            , evt_close(m_impl.evt_close)
+            , evt_connection(m_impl.evt_connection)
+            , evt_request(m_impl.evt_request)
+            , evt_upgrade(m_impl.evt_upgrade)
         {}
 
         void listen(callback_t callback = callback_t())
@@ -41,6 +56,22 @@ namespace httpcpp
         {
             m_impl.close(callback);
         }
+
+    public:
+        long& headers_timeout;
+        bool& listening;
+        long& max_headers_count;
+        long& request_timeout;
+        long& timeout;
+        long& keep_alive_timeout;
+
+        event<>& evt_check_continue;
+        event<>& evt_check_expectation;
+        event<>& evt_client_error;
+        event<>& evt_close;
+        event<>& evt_connection;
+        event<>& evt_request;
+        event<>& evt_upgrade;
 
     private:
         impl m_impl;
