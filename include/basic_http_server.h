@@ -4,7 +4,7 @@
 
 namespace httpcpp
 {
-template <typename impl>
+template <typename impl, typename... cargs>
 class basic_http_server
 {
 public:
@@ -15,9 +15,10 @@ public:
 	using port_t	 = typename impl::port_t;
 
 public:
-	basic_http_server(context_t& context)
-		: m_impl(context), headers_timeout(m_impl.headers_timeout), listening(m_impl.listening),
-		  max_headers_count(m_impl.max_headers_count), request_timeout(m_impl.request_timeout), timeout(m_impl.timeout),
+	basic_http_server(cargs... constructor_arguments)
+		: m_impl(std::forward<cargs>(constructor_arguments)...), headers_timeout(m_impl.headers_timeout),
+		  listening(m_impl.listening), max_headers_count(m_impl.max_headers_count),
+		  request_timeout(m_impl.request_timeout), timeout(m_impl.timeout),
 		  keep_alive_timeout(m_impl.keep_alive_timeout), evt_check_continue(m_impl.evt_check_continue),
 		  evt_check_expectation(m_impl.evt_check_expectation), evt_client_error(m_impl.evt_client_error),
 		  evt_close(m_impl.evt_close), evt_connection(m_impl.evt_connection), evt_request(m_impl.evt_request),
